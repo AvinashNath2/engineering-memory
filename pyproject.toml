@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "engineering-memory"
+version = "0.1.0"
+description = "Local-first, Markdown-based engineering memory for developers and AI coding agents."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+  "typer>=0.12",
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+memory = "engineering_memory.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+engineering_memory = ["templates/*.md", "instructions/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,31 @@
+# Engineering Memory - machine-local configuration.
+# Default location: ~/.config/engineering-memory/config.yaml
+# Override with the EM_CONFIG environment variable.
+# EM_MEMORY_DIR overrides memory_dir without touching this file.
+
+# Where your memory data lives (keep it OUTSIDE your application repos).
+memory_dir: ~/engineering-memory-data
+
+# Regex used to find ticket IDs in branch names (case-insensitive match,
+# IDs are normalised to upper case).
+ticket_pattern: "[A-Za-z][A-Za-z0-9]+-\\d+"
+
+# Branches treated as "base" when working out which commits belong to a branch.
+base_branches: [main, master, develop, origin/main, origin/master, origin/develop]
+
+# Maximum number of commits captured per `memory capture`.
+max_commits: 50
+
+# Extra glob patterns (matched against path or file name) that must never be captured.
+extra_sensitive_patterns: []
+
+# Optional AI provider used by `memory update --ai`. Everything else works without it.
+#   provider: none     -> no AI (default); agents call `memory update` themselves
+#   provider: command  -> run a local command, prompt on stdin, JSON on stdout
+ai:
+  provider: none
+  command: ""          # e.g. "claude -p"
+  timeout_seconds: 300
+
+search:
+  use_fts: true        # use the optional SQLite FTS5 index when present
